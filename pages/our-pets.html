@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../css/app.min.css" />
+        <link rel="icon" type="image/x-icon" href="../img/favicon.ico" />
+        <title>Our pets</title>
+    </head>
+    <body>
+        <div class="wrapper-pets">
+            <header class="header-pets">
+                <a href="../index.html" class="header-pets__logo">
+                    <div class="header-pets__logo">
+                        <h1 class="header-pets__logo-title">Cozy House</h1>
+                        <p class="header-pets__logo-subtitle">
+                            Shelter for pets in Boston
+                        </p>
+                    </div>
+                </a>
+                <nav class="header-pets__navigation">
+                    <div class="header-pets__burger">
+                        <span class="header-pets__burger-top"></span>
+                        <span class="header-pets__burger-center"></span>
+                        <span class="header-pets__burger-bottom"></span>
+                    </div>
+                    <ul class="header-pets__navigation-list">
+                        <li class="header-pets__navigation-item">
+                            <a
+                                href="../index.html"
+                                class="header-pets__navigation-link"
+                                >About the shelter</a
+                            >
+                        </li>
+                        <li
+                            class="header-pets__navigation-item link-active-pets"
+                        >
+                            <a href="#" class="header-pets__navigation-link"
+                                >Our pets</a
+                            >
+                        </li>
+                        <li class="header-pets__navigation-item">
+                            <a
+                                href="../index.html#help"
+                                class="header-pets__navigation-link"
+                                >Help the shelter</a
+                            >
+                        </li>
+                        <li class="header-pets__navigation-item">
+                            <a
+                                href="#footer"
+                                class="header-pets__navigation-link"
+                                >Contacts</a
+                            >
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+            <div class="modal-menu-pets modal-menu_hidden">
+                <div class="modal-menu-pets__wrapper">
+                    <div class="modal-menu-pets__content">
+                        <ul class="modal-menu-pets__navigation-list">
+                            <li class="modal-menu-pets__navigation-item">
+                                <a
+                                    href="../index.html"
+                                    class="modal-menu-pets__navigation-link"
+                                    >About the shelter</a
+                                >
+                            </li>
+                            <li class="modal-menu-pets__navigation-item">
+                                <a
+                                    href=""
+                                    class="modal-menu-pets__navigation-link link-active-nav-pets"
+                                    >Our pets</a
+                                >
+                            </li>
+                            <li class="modal-menu-pets__navigation-item">
+                                <a
+                                    href="../index.html#help"
+                                    class="header-pets__navigation-link"
+                                    >Help the shelter</a
+                                >
+                            </li>
+                            <li class="modal-menu-pets__navigation-item">
+                                <a
+                                    href="#footer"
+                                    class="header-pets__navigation-link"
+                                    >Contacts</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <main class="main-pets">
+                <section class="pets">
+                    <section class="pets-content">
+                        <h3 class="pets-content__title">
+                            Our friends who<br />
+                            are looking for a house
+                        </h3>
+                        <section class="pets-content__list"></section>
+                        <section class="pets-content__navigation">
+                            <button
+                                class="button-arrow_inactive pets-content__navigation-link button__first-page"
+                            >
+                                <img
+                                    src="../img/pets/double-left_arrow.png"
+                                    alt="double-left_arrow"
+                                />
+                            </button>
+                            <button
+                                class="button-arrow_inactive pets-content__navigation-link button__prev-page"
+                            >
+                                <img
+                                    src="../img/pets/left_arrow.png"
+                                    alt="left_arrow"
+                                />
+                            </button>
+                            <button
+                                class="button-arrow_active pets-content__navigation-link"
+                            >
+                                1
+                            </button>
+                            <button
+                                class="button-arrow pets-content__navigation-link button__next-page"
+                            >
+                                <img
+                                    src="../img/pets/right_arrow.png"
+                                    alt="right_arrow"
+                                />
+                            </button>
+                            <button
+                                class="button-arrow pets-content__navigation-link button__last-page"
+                            >
+                                <img
+                                    src="../img/pets/double-right_arrow.png"
+                                    alt="double-right_arrow"
+                                />
+                            </button>
+                        </section>
+                    </section>
+                </section>
+                <div class="modal-pets">
+                    <div class="modal-pets__wrapper">
+                        <div class="modal-pets__close"></div>
+                    </div>
+                </div>
+            </main>
+            <footer class="footer" id="footer">
+                <section class="footer-content">
+                    <section class="footer-content__wrapper">
+                        <div class="footer-content__contacts">
+                            <h3 class="footer-content__contacts-title">
+                                For questions and suggestions
+                            </h3>
+                            <a
+                                href="mailto:email@shelter.com"
+                                class="footer-content__contacts-mail"
+                                >email@shelter.com</a
+                            >
+                            <a
+                                href="tel: +13 674 567 75 54"
+                                class="footer-content__contacts-phone"
+                                >+13 674 567 75 54</a
+                            >
+                        </div>
+                        <div class="footer-content__locations">
+                            <h3 class="footer-content__locations-title">
+                                We are waiting for your visit
+                            </h3>
+                            <a
+                                href="https://goo.gl/maps/4PLaqqy9GpmsuXjK9"
+                                target="_blank"
+                                class="footer-content__locations-first"
+                            >
+                                1 Central Street, Boston (entrance from the
+                                store)
+                            </a>
+                            <a
+                                href="https://goo.gl/maps/4PLaqqy9GpmsuXjK9"
+                                target="_blank"
+                                class="footer-content__locations-twice"
+                            >
+                                18 South Park, London
+                            </a>
+                        </div>
+                    </section>
+                    <div class="footer-content__picture">
+                        <picture class="footer-content__img">
+                            <source
+                                srcset="../img/footer/footer_puppy_320px.png"
+                                media="(max-width : 767.9px)"
+                            />
+                            <img
+                                src="../img/footer/footer_puppy.png"
+                                alt="puppy"
+                            />
+                        </picture>
+                    </div>
+                </section>
+            </footer>
+        </div>
+        <script src="../js/pets.js"></script>
+    </body>
+</html>
