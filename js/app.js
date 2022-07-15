@@ -1,49 +1,50 @@
 //main page
 //бургер меню
 
-const burger = document.querySelector(".header__burger");
-const modalMenu = document.querySelector(".modal-menu");
+const burger = document.querySelector('.header__burger');
+const modalMenu = document.querySelector('.modal-menu');
 const body = document.body;
-const header = document.querySelector(".header");
-const logo = document.querySelector(".header__logo");
+const header = document.querySelector('.header');
+const logo = document.querySelector('.header__logo');
 
-burger.addEventListener("click", function (e) {
-    modalMenu.classList.toggle("modal-menu_visible");
-    modalMenu.classList.toggle("modal-menu_hidden");
-    body.classList.toggle("body-overflow_hidden");
-    burger.classList.toggle("header__burger_rotate");
-    header.classList.toggle("header_rotate");
-    logo.classList.toggle("header__logo_rotate");
+burger.addEventListener('click', function (e) {
+    modalMenu.classList.toggle('modal-menu_visible');
+    modalMenu.classList.toggle('modal-menu_hidden');
+    body.classList.toggle('body-overflow_hidden');
+    burger.classList.toggle('header__burger_rotate');
+    header.classList.toggle('header_rotate');
+    logo.classList.toggle('header__logo_rotate');
 });
 
-modalMenu.addEventListener("click", function (e) {
+modalMenu.addEventListener('click', function (e) {
     if (
-        e.target.classList == "modal-menu__wrapper" ||
-        e.target.classList == "header__navigation-link" ||
-        e.target.classList == "link-active-nav"
+        e.target.classList == 'modal-menu__wrapper' ||
+        e.target.classList == 'header__navigation-link' ||
+        e.target.classList == 'link-active-nav'
     ) {
-        modalMenu.classList.toggle("modal-menu_visible");
-        modalMenu.classList.toggle("modal-menu_hidden");
-        body.classList.toggle("body-overflow_hidden");
-        burger.classList.toggle("header__burger_rotate");
-        header.classList.toggle("header_rotate");
-        logo.classList.toggle("header__logo_rotate");
+        modalMenu.classList.toggle('modal-menu_visible');
+        modalMenu.classList.toggle('modal-menu_hidden');
+        body.classList.toggle('body-overflow_hidden');
+        burger.classList.toggle('header__burger_rotate');
+        header.classList.toggle('header_rotate');
+        logo.classList.toggle('header__logo_rotate');
     }
 });
 
 //робота із отримання JSON-данних та реалізація інтерактивного слайдера
 
 const url =
-    "https://raw.githubusercontent.com/rolling-scopes-school/tasks/master/tasks/markups/level-2/shelter/pets.json";
+    'https://raw.githubusercontent.com/rolling-scopes-school/tasks/master/tasks/markups/level-2/shelter/pets.json';
 
-const slider = document.querySelector(".friends-content__slider");
-const cardList = document.querySelector(".friends-content__card-list");
+const slider = document.querySelector('.friends-content__slider');
+const cardList = document.querySelector('.friends-content__card-list');
 let petsArray = [];
 let currentPets = [];
 let indexOfSum = 7;
 let indexForFuncRandom = [];
 let petsArrayWithoutCurrentPet = new Set();
 let lastPets = [];
+let direction = null;
 
 let promise = fetch(url)
     .then((res) => res.json())
@@ -61,16 +62,27 @@ let promise = fetch(url)
     });
 
 function sliderContent(array) {
-    cardList.innerHTML = "";
+    if (cardList.classList.contains('animation-left')) {
+        cardList.classList.remove('animation-left');
+    } else if (cardList.classList.contains('animation-right')) {
+        cardList.classList.remove('animation-right');
+    }
+    cardList.innerHTML = '';
     let index = createUniqIndex();
-    let fragment = "";
-    let sliderEllementOne = addCard(array[index[0]], 1);
-    fragment += sliderEllementOne;
-    let sliderEllementTwo = addCard(array[index[1]], 2);
-    fragment += sliderEllementTwo;
-    let sliderEllementThree = addCard(array[index[2]], 3);
-    fragment += sliderEllementThree;
-    cardList.insertAdjacentHTML("afterbegin", fragment);
+    let fragment = rendercard(array);
+    cardList.insertAdjacentHTML('afterbegin', fragment);
+    if (direction === 'left') {
+        cardList.classList.add('from-right');
+    } else if (direction === 'right') {
+        cardList.classList.add('from-left');
+    }
+    cardList.addEventListener('animationend', () => {
+        if (direction === 'left') {
+            cardList.classList.remove('from-right');
+        } else if (direction === 'right') {
+            cardList.classList.remove('from-left');
+        }
+    });
     petsArray.forEach((el, i) => {
         petsArrayWithoutCurrentPet.add(el);
     });
@@ -82,6 +94,18 @@ function sliderContent(array) {
         lastPets.push(el);
     });
     indexOfSum = petsArrayWithoutCurrentPet.size - 1;
+}
+
+function rendercard(array) {
+    let index = createUniqIndex();
+    let fragment = '';
+    let sliderEllementOne = addCard(array[index[0]], 1);
+    fragment += sliderEllementOne;
+    let sliderEllementTwo = addCard(array[index[1]], 2);
+    fragment += sliderEllementTwo;
+    let sliderEllementThree = addCard(array[index[2]], 3);
+    fragment += sliderEllementThree;
+    return fragment;
 }
 
 function addCard(el, number) {
@@ -139,24 +163,26 @@ function createUniqIndex() {
     return res;
 }
 
-slider.addEventListener("click", function (e) {
-    const leftBtn = document.querySelector(".left-arrow");
-    const rightBtn = document.querySelector(".right-arrow");
+slider.addEventListener('click', function (e) {
+    const leftBtn = document.querySelector('.left-arrow');
+    const rightBtn = document.querySelector('.right-arrow');
     if (e.target === leftBtn) {
-        sliderContent(lastPets);
+        direction = 'left';
+        animationAtSlider('animation-left');
     }
     if (e.target === rightBtn) {
-        sliderContent(lastPets);
+        direction = 'right';
+        animationAtSlider('animation-right');
     }
 });
 
-slider.addEventListener("click", function (e) {
-    if (e.target.closest(".friends-content__card")) {
+slider.addEventListener('click', function (e) {
+    if (e.target.closest('.friends-content__card')) {
         let obj;
         petsArray.forEach((el) => {
             if (
                 el.name ==
-                e.target.closest(".friends-content__card").children[1].innerText
+                e.target.closest('.friends-content__card').children[1].innerText
             ) {
                 obj = el;
             }
@@ -165,42 +191,52 @@ slider.addEventListener("click", function (e) {
     }
 });
 
-// робота з popup
-const modalFriend = document.querySelector(".modal-friend");
-const modalFriendWrapper = document.querySelector(".modal-friend__wrapper");
+function animationAtSlider(animation) {
+    cardList.classList.add(animation);
+    setTimeout(newContent, 500);
+}
 
-modalFriend.addEventListener("click", function (e) {
+function newContent(direction) {
+    sliderContent(lastPets, direction);
+}
+
+// робота з popup
+const modalFriend = document.querySelector('.modal-friend');
+const modalFriendWrapper = document.querySelector('.modal-friend__wrapper');
+
+//if (modalFrienf) {}
+modalFriend.addEventListener('click', function (e) {
     if (
-        e.target.closest(".modal-friend__close") ||
-        e.target.classList == "modal-friend modal-friend_visible"
+        e.target.closest('.modal-friend__close') ||
+        e.target.classList == 'modal-friend modal-friend_visible'
     ) {
-        modalFriend.classList.toggle("modal-friend_visible");
-        body.classList.toggle("body-overflow_hidden");
+        modalFriend.classList.toggle('modal-friend_visible');
+        body.classList.toggle('body-overflow_hidden');
     }
 });
 
 function addContentToPopup(obj) {
-    modalFriendWrapper.innerHTML = "";
-    modalFriend.classList.toggle("modal-friend_visible");
-    body.classList.toggle("body-overflow_hidden");
-    let fragment = "";
+    modalFriendWrapper.innerHTML = '';
+    modalFriend.classList.toggle('modal-friend_visible');
+    body.classList.toggle('body-overflow_hidden');
+    let fragment = '';
     let closeBtn = closeButton();
     fragment += closeBtn;
     let card = createPopup(obj);
     fragment += card;
-    modalFriendWrapper.insertAdjacentHTML("afterbegin", fragment);
+    modalFriendWrapper.insertAdjacentHTML('afterbegin', fragment);
     addHoverEffectAtBtnClose();
 }
 
 function addHoverEffectAtBtnClose() {
-    const modalFriendsCard = document.querySelector(".modal-friend__card");
-    modalFriendsCard.addEventListener("mouseleave", function (e) {
-        const closeBtn = document.querySelector(".modal-friend__close");
-        closeBtn.classList.add("modal-friend__close-hover");
+    const modalFriendsCard = document.querySelector('.modal-friend__card');
+    modalFriendsCard.addEventListener('mouseleave', function (e) {
+        const closeBtn = document.querySelector('.modal-friend__close');
+        closeBtn.classList.add('modal-friend__close-hover');
     });
-    modalFriendsCard.addEventListener("mouseenter", function (e) {
-        const closeBtn = document.querySelector(".modal-friend__close");
-        closeBtn.classList.remove("modal-friend__close-hover");
+    modalFriendsCard.addEventListener('mouseenter', function (e) {
+        const closeBtn = document.querySelector('.modal-friend__close');
+        closeBtn.classList.remove('modal-friend__close-hover');
     });
 }
 
@@ -236,4 +272,20 @@ function createPopup(element) {
     </div>`;
 }
 
-// pets page
+function newArr(arr) {
+    let res = [];
+    let ind = 0;
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        if (ind === 1) {
+            sum += arr[i];
+            res.push(sum);
+            ind = 0;
+            sum = 0;
+        } else {
+            sum += arr[i];
+            ind++;
+        }
+    }
+    return res;
+}
